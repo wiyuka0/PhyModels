@@ -1,0 +1,19 @@
+name: PhyModels
+version: '1.0-SNAPSHOT'
+main: com.volatila.phymodels.PhyModels
+api-version: '1.21'
+commands:
+  addmodel:
+
+  generatemodel:
+
+  addscript:
+
+  scriptstart:
+
+  removemodel:
+
+  toggledebug:
+
+  phyperform:
+
