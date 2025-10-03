@@ -4,7 +4,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-group = "com.volatila"
+group = "com.wiyuka"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -19,14 +19,12 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    runtimeOnly("com.github.stephengold:Libbulletjme-Windows64:22.0.1:SpMtRelease")
+    runtimeOnly("com.github.stephengold:Libbulletjme-Windows64:22.0.3:SpMtRelease")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("javax.vecmath:vecmath:1.5.2")
     implementation("com.google.code.gson:gson:2.10.1")
-
-    implementation("com.github.stephengold:Libbulletjme-Windows64:22.0.1")
+    implementation("com.github.stephengold:Libbulletjme-Windows64:22.0.3")
     implementation("io.github.electrostat-lab:snaploader:1.0.0-stable")
-
 }
 
 tasks {

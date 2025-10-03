@@ -1,7 +1,8 @@
 name: PhyModels
 version: '1.0-SNAPSHOT'
-main: com.volatila.phymodels.PhyModels
+main: com.wiyuka.phymodels.PhyModels
 api-version: '1.21'
+folia-supported: true
 commands:
   addmodel:
 
@@ -16,4 +17,9 @@ commands:
   toggledebug:
 
   phyperform:
+
+  modelinfo:
+
+  cloth:
+
 
