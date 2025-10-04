@@ -5,6 +5,7 @@ import com.jme3.math.Vector3f
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
+import org.bukkit.block.data.BlockData
 import org.joml.Vector3i
 import kotlin.math.max
 import kotlin.math.min
@@ -14,14 +15,14 @@ class LocationUtil {
         fun getRelBlockList(
             blockList: HashMap<Location, Block>,
             center: Vector3i
-        ): MutableMap<Vector3i, Material> {
-            val blockListVector3i = mutableMapOf<Vector3i, Material>()
+        ): MutableMap<Vector3i, BlockData> {
+            val blockListVector3i = mutableMapOf<Vector3i, BlockData>()
             for ((loc, block) in blockList) {
                 val material = block.type
                 if (material.isAir) continue
                 val vector3i = Vector3i(loc.x.toInt(), loc.y.toInt(), loc.z.toInt())
                 vector3i.sub(center.x, center.y, center.z)
-                blockListVector3i[vector3i] = material
+                blockListVector3i[vector3i] = block.blockData
             }
             return blockListVector3i
         }

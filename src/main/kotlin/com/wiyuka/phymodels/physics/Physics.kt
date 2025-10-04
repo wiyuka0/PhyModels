@@ -19,6 +19,7 @@ import com.wiyuka.phymodels.physics.objmanager.ObjectManager
 import com.wiyuka.phymodels.physics.objmanager.TaskProcessor
 import com.wiyuka.phymodels.physics.listener.ticklistener.DebugListener
 import com.wiyuka.phymodels.physics.listener.ticklistener.DistanceOptimization
+import com.wiyuka.phymodels.physics.listener.ticklistener.FrustumCulling
 import com.wiyuka.phymodels.tools.Crawl
 import com.wiyuka.phymodels.util.toVector3f
 import org.bukkit.Bukkit
@@ -78,6 +79,7 @@ class Physics {
             world.addTickListener(Crawl.TickListener())
             world.addTickListener(DebugListener())
             world.addTickListener(BodySync())
+            world.addTickListener(FrustumCulling(PhyModels.plugin))
         }
         data class DragConfig(
             val speedMultiple: Float = 1.2f,

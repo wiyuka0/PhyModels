@@ -21,7 +21,7 @@ class ThrustEngine: ForceAppend {
         val engineType = Material.END_ROD
         for ((v3i, block) in modelEntity.displayBlocks) {
             if (block.entity.block.material  == engineType) {
-                val thrustForce = 1f // 设定一个推力值
+                val thrustForce = 10000f // 设定一个推力值
                 val forceDirection = block.entity.location.direction // 推力方向
                 // 向下旋转90°
                 val forceVector = forceDirection.multiply(thrustForce)

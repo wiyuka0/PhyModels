@@ -243,6 +243,9 @@ fun com.jme3.math.Vector3f.toLocation(world: World): Location {
 fun Quaternion.toVecmathQuat4f(): Quat4f{
     return Quat4f(this.x, this.y, this.z, this.w)
 }
+fun Quaternion.toJomlQuaternionf(): Quaternionf{
+    return Quaternionf(this.x.toFloat(), this.y.toFloat(), this.z.toFloat(), this.w.toFloat())
+}
 fun org.joml.Vector3f.toVecmath(): Vector3f {
     return Vector3f(this.x.toFloat(), this.y.toFloat(), this.z.toFloat())
 }

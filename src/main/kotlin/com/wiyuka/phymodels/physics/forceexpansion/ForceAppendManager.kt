@@ -35,7 +35,7 @@ class ForceAppendManager {
             this.registerForceAppend(Buoyancy())
             this.registerForceAppend(AirBuoyancy())
             this.registerForceAppend(ThrustEngine())
-            this.registerForceAppend(FixedGravity())
+//            this.registerForceAppend(FixedGravity())
         }
     }
 }

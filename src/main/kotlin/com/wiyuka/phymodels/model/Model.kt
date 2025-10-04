@@ -7,6 +7,7 @@ import com.wiyuka.phymodels.util.LocationUtil
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.data.BlockData
 import org.bukkit.plugin.Plugin
 import org.joml.Vector3i
 import java.io.File
@@ -16,7 +17,7 @@ import javax.vecmath.Quat4f
 import javax.vecmath.Vector3f
 
 data class Model(
-    val blocks: MutableMap<Vector3i, Material>, //储存相对于模型原点的每个方块的坐标和种类
+    val blocks: MutableMap<Vector3i, BlockData>, //储存相对于模型原点的每个方块的坐标和种类
     val mass: Float,
     val name: String
 ){
@@ -35,7 +36,7 @@ data class Model(
         fun setup(plugin: Plugin){
             plugin.logger.info { "loading models..." }
             val startTime = System.currentTimeMillis()
-            staticModels.addAll(getModels(plugin))
+//            staticModels.addAll(getModels(plugin))
             val endTime = System.currentTimeMillis()
             plugin.logger.info { "loaded ${staticModels.size} models in ${endTime - startTime}ms" }
         }

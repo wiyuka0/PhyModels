@@ -36,36 +36,38 @@ class Active: Listener {
         val zMax = blockList.maxOf { it.z }
         val zMin = blockList.minOf { it.z }
 
-        val centerX = ((xMax + xMin) / 2) + 1.0
-        val centerY = ((yMax + yMin) / 2) + 1.0
-        val centerZ = ((zMax + zMin) / 2) + 0.0
+        val centerX = ((xMax + xMin) / 2) + 0.5
+        val centerY = ((yMax + yMin) / 2) + 0.5
+        val centerZ = ((zMax + zMin) / 2) + 0.5
 
         val centerLoc = Location(blockLoc.world, centerX, centerY, centerZ)
         val minLoc = Location(blockLoc.world, xMin.toDouble(), yMin.toDouble(), zMin.toDouble())
         val maxLoc = Location(blockLoc.world, xMax.toDouble(), yMax.toDouble(), zMax.toDouble())
 
         val modelName = UUID.randomUUID().toString()
-        val modelCenter = Vector3i(e.player.x.toInt(), e.player.y.toInt(), e.player.z.toInt())
+//        val modelCenter = Vector3i(e.player.x.toInt(), e.player.y.toInt(), e.player.z.toInt())
+        val modelCenter = Vector3i(centerLoc.x.toInt(), centerLoc.y.toInt(), centerLoc.z.toInt())
         val modelInfo = ModelManager.makeModel(minLoc, maxLoc, modelCenter, 1f,
             modelName, modelCenter.toVector3f()
         )
         val model = modelInfo.first
         val fixedCenter = modelInfo.second
 
-        LocationUtil.getBlocksInArea(minLoc, maxLoc).map {
-            it.value.type = Material.AIR
-            Physics.removeStaticBlock(block)
-        }
 
 //        val modelGeometricCenter = model.getGeometricCenter(centerLoc, 1f)
 
-        ModelManager.generateModel(
+        val modelEntity = ModelManager.generateModel(
             Model.getModelByName(modelName)!!,
-            fixedCenter.toLocation(e.player.world),
+            modelCenter.toLocation(e.player.world),
             1f,
             BodyType.PHYSICAL,
             e.player.world.name
         )
+
+        LocationUtil.getBlocksInArea(minLoc, maxLoc).map {
+            it.value.type = Material.AIR
+            Physics.removeStaticBlock(block)
+        }
 
         e.player.sendMessage("Model ${model.name} generated.")
 

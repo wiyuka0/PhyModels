@@ -21,6 +21,11 @@ class ClothCommand: CommandExecutor {
         }
 
         val player = p0 as Player
+
+
+
+        player.inventory.addItem()
+
         val baseLocation = player.location
         val sideLength = p3[0].toFloat()
         val width = p3[1].toInt()

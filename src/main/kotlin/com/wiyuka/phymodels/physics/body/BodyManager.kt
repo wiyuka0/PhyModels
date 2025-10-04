@@ -115,16 +115,16 @@ class BodyManager {
         }
 
 
-        fun buildLimbModel(limbInfo: LimbInfo, skinImage: BufferedImage? = null): Model{
-            // TODO: Dynamic skin model
-            val limbScale = limbInfo.scale
-            val blocks = mutableMapOf<Vector3i, Material>()
-
-            for (x in 0..(limbScale.x * 16).toInt()) for (y in 0..(limbScale.y * 16).toInt()) for (z in 0..(limbScale.z * 16).toInt())
-                blocks[Vector3i(x,y,z)] = Material.WHITE_CONCRETE
-
-            return Model(blocks, limbInfo.mass, "${UUID.randomUUID()}-bodylimb-${limbInfo.scale}")
-        }
+//        fun buildLimbModel(limbInfo: LimbInfo, skinImage: BufferedImage? = null): Model{
+//            // TODO: Dynamic skin model
+//            val limbScale = limbInfo.scale
+//            val blocks = mutableMapOf<Vector3i, Material>()
+//
+//            for (x in 0..(limbScale.x * 16).toInt()) for (y in 0..(limbScale.y * 16).toInt()) for (z in 0..(limbScale.z * 16).toInt())
+//                blocks[Vector3i(x,y,z)] = Material.WHITE_CONCRETE
+//
+//            return Model(blocks, limbInfo.mass, "${UUID.randomUUID()}-bodylimb-${limbInfo.scale}")
+//        }
 
 
         fun buildRigidBody(limbInfo: LimbInfo, baseLocation: Location): PhysicsRigidBody{

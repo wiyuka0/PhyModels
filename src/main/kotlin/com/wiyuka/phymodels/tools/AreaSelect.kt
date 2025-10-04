@@ -83,6 +83,6 @@ class AreaSelect: Listener {
     }
 }
 
-private fun Vector3i.toLocation(world: World): Location {
+fun Vector3i.toLocation(world: World): Location {
     return Location(world, x.toDouble(), y.toDouble(), z.toDouble())
 }

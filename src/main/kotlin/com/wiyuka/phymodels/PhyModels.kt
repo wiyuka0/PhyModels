@@ -22,6 +22,7 @@ import com.wiyuka.phymodels.tools.AreaSelect
 import com.wiyuka.phymodels.tools.Crawl
 import com.wiyuka.phymodels.tools.LiquidActive
 import com.wiyuka.phymodels.tools.P2PCreator
+import com.wiyuka.phymodels.virtualworld.VirtualWorld
 import electrostatic4j.snaploader.LibraryInfo
 import electrostatic4j.snaploader.LoadingCriterion
 import electrostatic4j.snaploader.NativeBinaryLoader
@@ -84,6 +85,7 @@ class PhyModels : JavaPlugin() {
 
         logger.info("")
         logger.info("======= Physics world Initialize Start =======")
+        VirtualWorld.initialize()
         loadBulletNativeLibrary()
         PhysicsTickManager.setup(this)
         logger.info("======= Physics world Load Finish =======")

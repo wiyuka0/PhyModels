@@ -4,7 +4,7 @@ package com.wiyuka.phymodels
 import com.jme3.bullet.collision.shapes.BoxCollisionShape
 import com.jme3.bullet.objects.PhysicsRigidBody
 import com.jme3.math.Transform
-import com.wiyuka.phymodels.model.ModelManager.Companion.getBlockMatrixWithoutPassableBlock
+import com.wiyuka.phymodels.model.ModelManager.getBlockMatrixWithoutPassableBlock
 import com.wiyuka.phymodels.physics.objmanager.BlockPhysicsUpdater
 import com.wiyuka.phymodels.physics.materialattributes.MaterialMass
 import com.wiyuka.phymodels.physics.obj.ModelEntity
@@ -157,6 +157,14 @@ class PhysicsTickManager {
             // Location Prediction
             blockMatrixCenter = offsetBySpeed(modelRigidBody, blockMatrixCenter)
             updateNearbyBlocks(blockMatrixCenter, modelSize)
+            updateModelState(modelEntity)
+        }
+
+
+        private fun updateModelState(modelEntity: ModelEntity) {
+            for ((gridLoc, blockUnit) in modelEntity.displayBlocks) {
+                blockUnit.entity.block = blockUnit.virtualWorldBlock.block.blockData
+            }
         }
 
         private fun offsetBySpeed(
