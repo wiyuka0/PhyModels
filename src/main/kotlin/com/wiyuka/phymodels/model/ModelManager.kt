@@ -146,11 +146,6 @@ object ModelManager {
         ObjectManager.addObjectToPhysicsWorld(modelInfo.first, worldName)
         ObjectManager.addModel(modelEntity, modelInfo.first)
 
-        val oldPhysicsLocation = modelEntity.rigidBody.getPhysicsLocation(null)
-        val newPhysicsLocation = oldPhysicsLocation.add(-2f, -2f, -2f)
-
-        modelEntity.rigidBody.setPhysicsLocation(newPhysicsLocation)
-
         return modelEntity
     }
 
@@ -336,12 +331,12 @@ object ModelManager {
         //build model shape
         val compoundShape = buildModelShape(scale, modelDisplayBlocks.keys.toSet())
 
-        val fixedSpawnLoc = spawnLoc.clone().apply {
-            val modelSize = model.getSize()
-            if (modelSize.x % 2 != 0) this.x += 0.5f
-            if (modelSize.y % 2 != 0) this.y += 0.5f
-            if (modelSize.z % 2 != 0) this.z += 0.5f
-        }
+        val fixedSpawnLoc = spawnLoc.clone()//.apply {
+//            val modelSize = model.getSize()
+//            if (modelSize.x % 2 != 0) this.x += 0.5f
+//            if (modelSize.y % 2 != 0) this.y += 0.5f
+//            if (modelSize.z % 2 != 0) this.z += 0.5f
+//        }
 
         //re-calc mass center
         val offsetFromOrigin = Vector3f()

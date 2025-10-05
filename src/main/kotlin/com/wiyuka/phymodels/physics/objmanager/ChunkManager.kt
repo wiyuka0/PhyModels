@@ -37,7 +37,7 @@ class BlockPhysicsUpdater(val worldName: String) {
     fun updateAllChunks() {
         for (chunk in chunkBodies.values.toList().filter { it.needUpdate() }) chunk.commitChanges(worldName)
     }
-
+        //bug？
     private fun getChunkCoord(pos: Vector3i): BlockChunkCoord {
         return BlockChunkCoord(pos.x shr 3, pos.y shr 3, pos.z shr 3)
     }
@@ -148,9 +148,7 @@ class ChunkRigidBody(private val coord: BlockChunkCoord) {
                     coord.y * BlockPhysicsUpdater.CHUNK_SIZE.toFloat(),
                     coord.z * BlockPhysicsUpdater.CHUNK_SIZE.toFloat()
                 )
-                rigidBody.scheduler {
                     rigidBody.setPhysicsLocation(worldOffset)
-                }
             }
         }
     }

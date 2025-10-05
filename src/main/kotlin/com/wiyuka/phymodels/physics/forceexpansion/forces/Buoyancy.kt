@@ -53,11 +53,10 @@ class Buoyancy: ForceAppend {
             val zOffset = if(modelSize.z % 2 == 0) 0.5f else 0f
             val localOffset = v3i.toVector3f().toJmeVector3f().clone().add(xOffset, yOffset, zOffset)
 //            println("applyForceExecution")
-            rigidBody.scheduler {
 //                println("applyForce: $forceVector, $localOffset")
                 rigidBody.applyForce(forceVector, localOffset)
 
-            }
+            // 我感觉这里应该也不需要scheduler吧
         }
         val totalBlocks = modelEntity.displayBlocks.size
         val inWaterProportion = submergedVolume / totalBlocks
@@ -68,9 +67,9 @@ class Buoyancy: ForceAppend {
         val linearDamping = Physics.BASE_LINEAR_DAMPING + (appendLinearDamping * inWaterProportion)
         val angularDamping = Physics.BASE_ANGULAR_DAMPING + (appendAngularDamping * inWaterProportion)
 
-        rigidBody.scheduler {
+//        rigidBody.scheduler {
             rigidBody.linearDamping = linearDamping
             rigidBody.angularDamping = angularDamping
-        }
+//        }
     }
 }
