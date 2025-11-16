@@ -1,5 +1,6 @@
 package com.wiyuka.phymodels.command
 
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.physics.cloth.ClothManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -14,6 +15,8 @@ class ClothCommand: CommandExecutor {
         p3: Array<out String>
     ): Boolean {
         //     fun addCloth(baseLocation: Location, sideLength: Float, width: Int, length: Int, height: Float, totalMass: Float, world: World): Cloth{
+
+        if(!hasPerm(p0)) return true
 
         if(p3[0] == "clear"){
             ClothManager.clear()

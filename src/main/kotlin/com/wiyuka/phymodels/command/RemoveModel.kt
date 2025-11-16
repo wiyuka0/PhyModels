@@ -1,5 +1,6 @@
 package com.wiyuka.phymodels.command
 
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.ModelManager
 import com.wiyuka.phymodels.physics.obj.ModelEntity
 import com.wiyuka.phymodels.physics.objmanager.ObjectManager
@@ -16,7 +17,7 @@ class RemoveModel: CommandExecutor, TabCompleter{
         p3: Array<out String>
     ): Boolean {
 
-        if(!p0.hasPermission("phymodels.model")) return true
+        if(!hasPerm(p0)) return true
 
         try {
             val modelEntity = ObjectManager.livingModels.values.filter { it.model.name == p3[0] }[0]

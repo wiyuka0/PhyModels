@@ -1,6 +1,7 @@
 package com.wiyuka.phymodels.command
 
 import com.wiyuka.phymodels.PhyModels
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.Model
 import org.joml.Vector3i
 import com.wiyuka.phymodels.model.ModelManager
@@ -31,7 +32,8 @@ class AddModel(val plugin: Plugin): CommandExecutor, TabCompleter {
             p0.sendMessage("This command is player only.")
             return true
         }
-        if(!player.hasPermission("phymodels.model")) return true
+        if(!hasPerm(p0)) return true
+//        if(!player.hasPermission("phymodels.model")) return true
 
         try {
             val loc1 = Location(player.world, p3[0].toDouble(), p3[1].toDouble(), p3[2].toDouble())

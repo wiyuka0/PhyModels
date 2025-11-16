@@ -1,5 +1,6 @@
 package com.wiyuka.phymodels.command
 
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.physics.liquid.LiquidManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -8,6 +9,8 @@ import org.bukkit.entity.Player
 
 class LiquidClear: CommandExecutor {
     override fun onCommand(p0: CommandSender, p1: Command, p2: String, p3: Array<out String>): Boolean {
+        if(!hasPerm(p0)) return true
+
         LiquidManager.clear()
         return true
     }

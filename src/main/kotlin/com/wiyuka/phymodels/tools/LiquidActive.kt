@@ -1,5 +1,6 @@
 package com.wiyuka.phymodels.tools
 
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.physics.liquid.LiquidManager
 import com.wiyuka.phymodels.physics.liquid.LiquidType
 import com.wiyuka.phymodels.physics.obj.toJmeVector3f
@@ -21,7 +22,7 @@ class LiquidActive: Listener{
     fun liquidActive(e: BlockBreakEvent) {
         if(e.player.inventory.itemInMainHand.type != Material.SUGAR_CANE) return
         val player = e.player
-        if(!player.hasPermission("phymodels.model")) return
+        if(!hasPerm(e.player)) return
         e.isCancelled = true
         val block = e.block
         val blockLoc = block.location.toJmeVector3f()

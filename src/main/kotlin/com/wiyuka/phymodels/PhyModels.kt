@@ -15,8 +15,10 @@ import com.wiyuka.phymodels.command.ToggleDebug
 import com.wiyuka.phymodels.droppeditem.DroppedItem
 import com.wiyuka.phymodels.listener.Listeners
 import com.wiyuka.phymodels.model.Model
+import com.wiyuka.phymodels.model.ModelManager
 import com.wiyuka.phymodels.physics.Physics
 import com.wiyuka.phymodels.physics.cloth.Cloth
+import com.wiyuka.phymodels.physics.objmanager.ObjectManager
 import com.wiyuka.phymodels.tools.Active
 import com.wiyuka.phymodels.tools.AreaSelect
 import com.wiyuka.phymodels.tools.Crawl
@@ -131,5 +133,9 @@ class PhyModels : JavaPlugin() {
 
     override fun onDisable() {
         // Plugin shutdown logic
+        for (entity in ObjectManager.livingModels.values) {
+            ModelManager.removeModel(entity)
+        }
+
     }
 }

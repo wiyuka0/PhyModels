@@ -22,7 +22,7 @@ class LocationUtil {
                 if (material.isAir) continue
                 val vector3i = Vector3i(loc.x.toInt(), loc.y.toInt(), loc.z.toInt())
                 vector3i.sub(center.x, center.y, center.z)
-                blockListVector3i[vector3i] = block.blockData
+                blockListVector3i[vector3i] = block.blockData.clone()
             }
             return blockListVector3i
         }

@@ -22,7 +22,7 @@ class BukkitListenerManager {
             Bukkit.getPluginManager().registerEvents(Active(), plugin)
             Bukkit.getPluginManager().registerEvents(P2PCreator(), plugin)
             Bukkit.getPluginManager().registerEvents(Crawl(), plugin)
-            Bukkit.getPluginManager().registerEvents(PlayerDeathListener(), plugin)
+//            Bukkit.getPluginManager().registerEvents(PlayerDeathListener(), plugin)
 
             if(plugin.config.getBoolean("enableDroppedItem")){
 //                Bukkit.getPluginManager().registerEvents(DroppedItemListener(), plugin)

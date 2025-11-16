@@ -111,6 +111,7 @@ class PhysicsTickManager {
 
         private fun processSingleModel(modelUniqueId: String, tickTimeRate: Float) {
             val modelEntity = ObjectManager.livingModels[modelUniqueId] ?: return
+            updateModelState(modelEntity)
             val modelRigidBody = modelEntity.rigidBody
 
             if(modelRigidBody.activationState != 1) return
@@ -157,7 +158,6 @@ class PhysicsTickManager {
             // Location Prediction
             blockMatrixCenter = offsetBySpeed(modelRigidBody, blockMatrixCenter)
             updateNearbyBlocks(blockMatrixCenter, modelSize)
-            updateModelState(modelEntity)
         }
 
 

@@ -1,6 +1,7 @@
 package com.wiyuka.phymodels.command
 
 import com.wiyuka.phymodels.PhysAPI.Companion.BodyType
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.Model
 import com.wiyuka.phymodels.model.ModelManager
 import io.papermc.paper.command.CommandBlockHolder
@@ -37,7 +38,7 @@ class GenerateModel: CommandExecutor, TabCompleter {
 //            var location: Location? = null
             if(p0 is Player) {
                 val player = p0 as Player
-                if (!player.hasPermission("phymodels.model")) return true
+                if(!hasPerm(p0)) return true
             }
             val location = when(p0) {
                 is Player -> {

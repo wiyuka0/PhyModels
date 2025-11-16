@@ -23,6 +23,8 @@ import org.bukkit.entity.BlockDisplay
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerDropItemEvent
+import org.bukkit.event.player.PlayerInputEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -73,9 +75,10 @@ class Listeners: Listener {
     val playerFlags = mutableMapOf<String, Boolean>()
     val PLAYER_INTERACT_DISTANCE_SQUARED = 36.0
     @EventHandler(priority = EventPriority.HIGHEST)
-    fun onPlayerInteract(event: PlayerInteractEvent) {
+    fun onPlayerInteract(event: PlayerDropItemEvent) {
 //        if (!event.action.isRightClick) return
 //        event.player.sendMessage("Interacted")
+
         val player = event.player
         val playerUniqueId = player.uniqueId.toString()
         if(playerFlags.computeIfAbsent(playerUniqueId.toString()) { true }) {
@@ -86,7 +89,11 @@ class Listeners: Listener {
         }
 
         val playerLocation = event.player.eyeLocation
-        val nearbyModels = ObjectManager.livingModels.filter { it.value.location.distanceSquared(playerLocation) <= PLAYER_INTERACT_DISTANCE_SQUARED }
+        val nearbyModels = ObjectManager.livingModels.filter {
+            if(it.value.location.world.name == playerLocation.world.name)
+                return@filter it.value.location.distanceSquared(playerLocation) <= PLAYER_INTERACT_DISTANCE_SQUARED
+            return@filter false
+        }
         if(nearbyModels.isEmpty()) return
         nearbyModels.forEach { uuid, model ->
                 val modelCenter = model.rigidBody.getPhysicsLocation(null)
@@ -113,7 +120,7 @@ class Listeners: Listener {
             val centerZ = ((maxZ + minZ) * 0.5f) + 0.5f
 
             val structureCenterPos = Location(VirtualWorld.virtualWorld, centerX.toDouble(), centerY.toDouble(), centerZ.toDouble())
-            val rayTraceStart = structureCenterPos.clone().add(relativePoint)
+            val rayTraceStart = structureCenterPos.clone().add(relativePoint).subtract(0.5, 0.5, 0.5)
             val rayTraceDirection = relativePoint.direction
 
 //            event.player.teleportAsync(rayTraceStart.apply { direction = rayTraceDirection })
@@ -134,6 +141,7 @@ class Listeners: Listener {
             is Openable -> {
                 data.isOpen = !data.isOpen
                 this.blockData = data
+                this.state.update(true, true)
             }
 
             // 拉杆、按钮（Switch covers both）
@@ -148,6 +156,7 @@ class Listeners: Listener {
             is Powerable -> {
                 data.isPowered = !data.isPowered
                 this.blockData = data
+                this.state.update(true, true)
             }
 
             // 比较器、中继器这种有强度的
@@ -176,14 +185,15 @@ class Listeners: Listener {
         val world = originOnWorld.world
         val direction = originOnWorld.direction
         val invRot = Quaternionf(rotation).invert()
-        val relativePoint = targetLocation.clone().subtract(originOnWorld).toJomlVector3f()
+
+        val relativePoint = targetLocation.clone().apply{ setWorld(originOnWorld.world) }.subtract(originOnWorld).toJomlVector3f()
         invRot.transform(relativePoint)
         val rotatedDirection = invRot.transform(direction.toVector3f())
         return Location(
             world,
-            relativePoint.x.toDouble(),
-            relativePoint.y.toDouble(),
-            relativePoint.z.toDouble()
+            relativePoint.x.toDouble() + 0.5,
+            relativePoint.y.toDouble() + 0.5,
+            relativePoint.z.toDouble() + 0.5
         ).apply {
             this.direction = (
                 org.bukkit.util.Vector(rotatedDirection.x, rotatedDirection.y, rotatedDirection.z)

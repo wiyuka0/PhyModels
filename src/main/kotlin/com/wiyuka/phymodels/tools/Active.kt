@@ -2,6 +2,7 @@ package com.wiyuka.phymodels.tools
 
 import com.wiyuka.phymodels.PhysicsTickManager
 import com.wiyuka.phymodels.PhysAPI.Companion.BodyType
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.Model
 import org.joml.Vector3i
 import com.wiyuka.phymodels.model.ModelManager
@@ -23,7 +24,7 @@ class Active: Listener {
     fun onBlockBreak(e: BlockBreakEvent) {
         if(e.player.inventory.itemInMainHand.type != Material.FLINT) return
         val player = e.player
-        if(!player.hasPermission("phymodels.model")) return
+        if(!hasPerm(e.player)) return
         e.isCancelled = true
         val block = e.block
         val blockLoc = block.location
@@ -85,7 +86,7 @@ class Active: Listener {
         val block = blockLoc.block
         if(block.type == Material.AIR) return totalSet
         if(totalSet.contains(block)) return totalSet
-        if(currentDeepLayer > 20) return totalSet
+        if(currentDeepLayer > 100) return totalSet
         totalSet.add(block)
         val x = blockLoc.x
         val y = blockLoc.y

@@ -1,5 +1,6 @@
 package com.wiyuka.phymodels.command
 
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.physics.objmanager.ObjectManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -13,6 +14,8 @@ class ModelInfo: CommandExecutor, TabCompleter{
         p2: String,
         p3: Array<out String>
     ): Boolean {
+        if(!hasPerm(p0)) return true
+
         val modelName = p3[0]
         val modelEntity = ObjectManager.livingModels[modelName]
         if(modelEntity == null) {

@@ -1,6 +1,7 @@
 package com.wiyuka.phymodels.command
 
 import com.wiyuka.phymodels.PhysAPI
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.Interpolation
 import com.wiyuka.phymodels.model.Model
 import com.wiyuka.phymodels.model.ModelManager
@@ -17,7 +18,7 @@ class AddScript: CommandExecutor {
         try {
             if (sender !is Player) sender.sendMessage("Player has to be a BukkitPlayer!")
             val player = sender as Player
-            if(!player.hasPermission("phymodels.model")) return true
+            if(!hasPerm(sender)) return true
             if (args.size < 2) {
                 player.sendMessage("Usage: /addscript <model> <scale> <repeatable> <keyframe1>;<keyframe2>;[keyframe3];...")
                 player.sendMessage("About the keyframe: \"{X,Y,Z,time}\" geometric center.")

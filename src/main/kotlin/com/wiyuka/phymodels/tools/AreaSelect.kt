@@ -2,6 +2,7 @@ package com.wiyuka.phymodels.tools
 
 import com.wiyuka.phymodels.PhysicsTickManager
 import com.wiyuka.phymodels.PhysAPI.Companion.BodyType
+import com.wiyuka.phymodels.command.Perm.hasPerm
 import com.wiyuka.phymodels.model.Model
 import org.joml.Vector3i
 import com.wiyuka.phymodels.model.ModelManager
@@ -30,7 +31,7 @@ class AreaSelect: Listener {
     @EventHandler
     fun onPlayerBreakBlock(e: BlockBreakEvent) {
         if(e.player.inventory.itemInMainHand.type != Material.STICK) return
-        if(!e.player.hasPermission("phymodels.model")) return
+        if(!hasPerm(e.player)) return
         e.isCancelled = true
         val playerCurrentState = playerStates.computeIfAbsent(e.player) { PlayerState() }
         val point = e.block.location
