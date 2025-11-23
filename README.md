@@ -24,7 +24,7 @@
 *   🏳️ **布料模拟 (Cloth Simulation)**
     *   创建可以随风飘动、与物体和玩家发生碰撞的布料。 *虽然说并没有风*
 
-*   📜 **脚本刚体 (Scriptable Rigid Bodies)**
+*   📜 **完了我写错了 (Scriptable Rigid Bodies)**
     *   为物理对象赋予生命！通过简单的脚本（例如 JavaScript/Lua），你可以自定义刚体的行为。
     *   创建自动门、陷阱、弹射器、或任何你能想象到的机械装置。
 
